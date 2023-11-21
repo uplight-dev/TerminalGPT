@@ -1,4 +1,7 @@
 """Conversations module."""
+import sys
+sys.path.append('~/deepseek_coder/')
+from deepseek_coder import completion
 
 import json
 import os
@@ -32,13 +35,22 @@ class ConversationManager:
 
         while True:
             try:
-                answer = openai.ChatCompletion.create(
+                answer = completion(
                     model=config.get_default_config()["model"], messages=messages
                 )
                 return answer
             except openai.OpenAIError:
                 time.sleep(10)
 
+    def completion(self, model, messages: list):
+        if (config.get_default_config()["gpt_type"] == 'openai') {
+            openai.ChatCompletion.create(
+                    model=config.get_default_config()["model"], messages=messages
+            )
+        } else if config.get_default_config()["gpt_type"] == 'deepseek_coder' {
+            
+        }
+    
     def create_conversation_name(self, messages: list):
         """Creates a context file name based on the title of the conversation."""
 
